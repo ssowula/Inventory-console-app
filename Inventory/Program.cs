@@ -32,4 +32,20 @@
         Quantity.Add(quantity);
         Console.WriteLine("Succsess");
     }
+     public static void showAllProducts()
+    {
+        int len = Products.Count;
+        if (len == 0)
+        {
+            Console.WriteLine("You have 0 products in your Inventory");
+        }
+        else
+        {
+            Console.WriteLine("Id. Name - Price - Quantity");
+            for (int i = 0; i < len; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Products[i]} - {Price[i]} - {Quantity[i]}");
+            }
+        }
+    }
 }
