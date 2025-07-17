@@ -3,7 +3,6 @@
     public static List<string> Products = new List<string>();
     public static List<double> Price = new List<double>();
     public static List<int> Quantity = new List<int>();
-    int len = Products.Count;
     public static void addNewProducts()
     {
         Console.WriteLine("Enter a name of product");
@@ -48,7 +47,7 @@
             }
         }
     }
-     public static void updateProducts()
+    public static void updateProducts()
     {
         int len = Products.Count;
         Console.WriteLine("Enter an Id of product you want to update: ");
@@ -126,5 +125,30 @@
             Console.WriteLine("There is no option with this number");
             return;
         }
+    }
+    public static void deleteProducts()
+    {
+        int len = Products.Count;
+        Console.WriteLine("Enter an Id of product you wanna delete: ");
+        int id;
+        if (!int.TryParse(Console.ReadLine(), out id))
+        {
+            Console.WriteLine("You need to enter an intiger");
+            return;
+        }
+        if (id > len + 1)
+        {
+            Console.WriteLine("We dont have that many products");
+            return;
+        }
+        else if (id <= 0)
+        {
+            Console.WriteLine("Id must be highier than 0");
+            return;
+        }
+        Products.RemoveAt(id - 1);
+        Price.RemoveAt(id - 1);
+        Quantity.RemoveAt(id - 1);
+        Console.WriteLine("Succsess");
     }
 }
