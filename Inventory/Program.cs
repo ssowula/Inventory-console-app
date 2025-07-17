@@ -3,6 +3,45 @@
     public static List<string> Products = new List<string>();
     public static List<double> Price = new List<double>();
     public static List<int> Quantity = new List<int>();
+     public static void Main(string[] args)
+    {
+        bool show = true;
+        while (show)
+        {
+            Console.WriteLine("Pick an action: ");
+            Console.WriteLine("1. Add product\n2. Update product\n3. Delete product\n4. Show all products\n5. Exit");
+            int selected;
+            if (!int.TryParse(Console.ReadLine(), out selected))
+            {
+                Console.WriteLine("You need to select proper action");
+                return;
+            }
+            if (selected > 5 || selected < 0)
+            {
+                Console.WriteLine("Error");
+                return;
+            }
+            switch (selected)
+            {
+                case 1:
+                    addNewProducts();
+                    break;
+                case 2:
+                    updateProducts();
+                    break;
+                case 3:
+                    deleteProducts();
+                    break;
+                case 4:
+                    showAllProducts();
+                    break;
+                case 5:
+                    Environment.Exit(0);
+                    break;
+            }
+        }
+    }
+
     public static void addNewProducts()
     {
         Console.WriteLine("Enter a name of product");
