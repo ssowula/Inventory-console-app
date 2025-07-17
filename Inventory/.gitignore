@@ -1,0 +1,23 @@
+# Dependencies
+**/[Dd]ebug/
+**/[Rr]elease/
+**/[Oo]bj/
+**/[Bb]in/
+*.[Ss]uо
+*.[Uu]ser
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Oo]bj/
+[Bb]in/
+
+# Visual Studio files
+.vs/
+*.sln.dotsettings
+*.suo
+
+# Cache files
+project.assets.json
+project.nuget.cache
+*.nuget.dgspec.json
