@@ -40,4 +40,3 @@ Projekt został stworzony w celach edukacyjnych, aby przećwiczyć fundamentalne
 ## 🎯 Plany na Przyszłość
 
 - [ ] Implementacja zapisu i odczytu stanu magazynu z pliku (np. JSON).
-- [ ] Podział kodu na osobne klasy dla lepszej organizacji.
