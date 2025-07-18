@@ -108,6 +108,7 @@ class Inventory
             Console.WriteLine("You have 0 products in your Inventory");
             return;
         }
+        showAllProducts();
         Console.WriteLine("Enter an Id of product you want to update: ");
         int id;
         if (!int.TryParse(Console.ReadLine(), out id))
