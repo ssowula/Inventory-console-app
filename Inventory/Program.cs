@@ -48,9 +48,12 @@ class Inventory
                     Environment.Exit(0);
                     break;
                 default:
-                Console.WriteLine("Invalid option, please try again.".Pastel(Color.Red));
-                break;
+                    Console.WriteLine("Invalid option, please try again.".Pastel(Color.Red));
+                    break;
             }
+            Console.WriteLine("\nPress any key to return to the menu...".Pastel(Color.Gray));
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 
