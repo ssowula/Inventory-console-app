@@ -19,8 +19,7 @@ class Inventory
     public static List<Product> products = new List<Product>();
     public static void Main(string[] args)
     {
-        bool show = true;
-        while (show)
+        while (true)
         {
             Console.WriteLine("INVENTORY MENU".Pastel(Color.Yellow));
             Console.WriteLine("1. Add product\n2. Update product\n3. Delete product\n4. Show all products\n5. Exit");
@@ -57,26 +56,48 @@ class Inventory
 
     public static void addNewProducts()
     {
-        Console.Write("Enter a name of product: ");
-        string? name = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(name))
+        string? name;
+        while (true)
         {
-            Console.WriteLine("Name can't be empty".Pastel(Color.Red));
-            return;
+            Console.Write("Enter a name of product: ");
+            name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Name can't be empty. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         double price;
-        Console.Write("Enter a price of product: ");
-        if (!double.TryParse(Console.ReadLine(), out price))
+        while (true)
         {
-            Console.WriteLine("Invalid price format. Please enter a number.".Pastel(Color.Red));
-            return;
+            Console.Write("Enter a price of product: ");
+            if (!double.TryParse(Console.ReadLine(), out price))
+            {
+                Console.WriteLine("Invalid price format. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         int quantity;
-        Console.Write("Enter a quantity of product: ");
-        if (!int.TryParse(Console.ReadLine(), out quantity))
+        while (true)
         {
-            Console.WriteLine("Invalid quantity format. Please enter a whole number.".Pastel(Color.Red));
-            return;
+            Console.Write("Enter a quantity of product: ");
+            if (!int.TryParse(Console.ReadLine(), out quantity))
+            {
+                Console.WriteLine("Invalid quantity format. Please enter a whole number.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         Product newProduct = new Product(name, price, quantity); //tworzymy zmienną typu Product o nazwie "newProduct" i przypisujemy jej wpisane przez użytkownika dane
         products.Add(newProduct);
@@ -106,74 +127,101 @@ class Inventory
         int len = products.Count;
         Console.Write("Enter an Id of product you want to update: ");
         int id;
-        if (!int.TryParse(Console.ReadLine(), out id))
+        while (true)
         {
-            Console.WriteLine("Please enter a number".Pastel(Color.Red));
-            return;
-        }
-         if (id > products.Count || id <= 0)
-        {
-            Console.WriteLine("A product with that ID does not exist.".Pastel(Color.Red));
-            return;
+            if (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("Please enter a number".Pastel(Color.Red));
+                continue;
+            }
+            else if (id > products.Count || id <= 0)
+            {
+                Console.WriteLine("A product with that ID does not exist. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         Console.WriteLine("What do you want to update?");
         Console.WriteLine("1. Name\n2. Price \n3. Quantity");
         int pick;
-        if (!int.TryParse(Console.ReadLine(), out pick))
+        while (true)
         {
-            Console.WriteLine("You need to enter an intiger".Pastel(Color.Red));
-            return;
+            if (!int.TryParse(Console.ReadLine(), out pick))
+            {
+                Console.WriteLine("You need to enter an intiger. Please try again".Pastel(Color.Red));
+                continue;
+            }
+            else if (pick < 0 || pick > 3)
+            {
+                Console.WriteLine("There is no option with this number. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         Product updateProduct = products[id - 1];
         if (pick == 1)
         {
             Console.Write("Enter new product name: ");
-            string? newName = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(newName))
+            string? newName;
+            while (true)
             {
-                Console.WriteLine("Wrong name".Pastel(Color.Red));
-                return;
+                newName = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(newName))
+                {
+                    Console.WriteLine("Wrong name. Please try again.".Pastel(Color.Red));
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                updateProduct.Name = newName;
-                Console.WriteLine("Success".Pastel(Color.LightGreen));
-            }
+            updateProduct.Name = newName;
+            Console.WriteLine("Success".Pastel(Color.LightGreen));
         }
         else if (pick == 2)
         {
             Console.Write("Enter new product price: ");
             double newPrice;
-            if (!double.TryParse(Console.ReadLine(), out newPrice))
+            while (true)
             {
-                Console.WriteLine("Wrong price".Pastel(Color.Red));
-                return;
+                if (!double.TryParse(Console.ReadLine(), out newPrice))
+                {
+                    Console.WriteLine("Wrong price. Please try again.".Pastel(Color.Red));
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                updateProduct.Price = newPrice;
-                Console.WriteLine("Success".Pastel(Color.LightGreen));
-            }
+            updateProduct.Price = newPrice;
+            Console.WriteLine("Success".Pastel(Color.LightGreen));
         }
         else if (pick == 3)
         {
             Console.Write("Please new product quantity: ");
             int newQuantity;
-            if (!int.TryParse(Console.ReadLine(), out newQuantity))
+            while (true)
             {
-                Console.WriteLine("Wrong quantity".Pastel(Color.Red));
-                return;
+                if (!int.TryParse(Console.ReadLine(), out newQuantity))
+                {
+                    Console.WriteLine("Wrong quantity. Please try again.".Pastel(Color.Red));
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                updateProduct.Quantity = newQuantity;
-                Console.WriteLine("Success".Pastel(Color.LightGreen));
-            }
-        }
-        else
-        {
-            Console.WriteLine("There is no option with this number".Pastel(Color.Red));
-            return;
+            updateProduct.Quantity = newQuantity;
+            Console.WriteLine("Success".Pastel(Color.LightGreen));
         }
     }
     public static void deleteProducts()
@@ -182,15 +230,22 @@ class Inventory
         int len = products.Count;
         Console.Write("Enter the ID of the product to delete: ");
         int id;
-        if (!int.TryParse(Console.ReadLine(), out id))
+        while (true)
         {
-            Console.WriteLine("You need to enter an intiger".Pastel(Color.Red));
-            return;
-        }
-        if (id > products.Count || id <= 0)
-        {
-            Console.WriteLine("A product with that ID does not exist.".Pastel(Color.Red));
-            return;
+            if (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("You need to enter an intiger. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else if (id > products.Count || id <= 0)
+            {
+                Console.WriteLine("A product with that ID does not exist. Please try again.".Pastel(Color.Red));
+                continue;
+            }
+            else
+            {
+                break;
+            }
         }
         products.RemoveAt(id - 1);
         Console.WriteLine("Success".Pastel(Color.LightGreen));
