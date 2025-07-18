@@ -1,29 +1,41 @@
 ﻿using System.Drawing;
 using Pastel;
+
+class Product
+{
+    public string Name { get; set; }
+    public double Price { get; set; }
+    public int Quantity { get; set; }
+
+    public Product(string name, double price, int quantity)
+    {
+        Name = name;
+        Price = price;
+        Quantity = quantity;
+    }
+}
 class Inventory
 {
-    public static List<string> Products = new List<string>();
-    public static List<double> Price = new List<double>();
-    public static List<int> Quantity = new List<int>();
-     public static void Main(string[] args)
+    public static List<Product> products = new List<Product>();
+    public static void Main(string[] args)
     {
         bool show = true;
         while (show)
         {
             Console.WriteLine("Pick an action: ");
             Console.WriteLine("1. Add product\n2. Update product\n3. Delete product\n4. Show all products\n5. Exit");
-            int selected;
-            if (!int.TryParse(Console.ReadLine(), out selected))
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("You need to select proper action");
                 return;
             }
-            if (selected > 5 || selected < 0)
+            if (choice > 5 || choice < 0)
             {
                 Console.WriteLine("Wrong number".Pastel(Color.Red));
                 return;
             }
-            switch (selected)
+            switch (choice)
             {
                 case 1:
                     addNewProducts();
@@ -67,14 +79,13 @@ class Inventory
             Console.WriteLine("You need to enter a int type".Pastel(Color.Red));
             return;
         }
-        Products.Add(name);
-        Price.Add(price);
-        Quantity.Add(quantity);
+        Product newProduct = new Product(name, price, quantity); //tworzymy zmienną typu Product o nazwie "newProduct" i przypisujemy jej wpisane przez użytkownika dane
+        products.Add(newProduct);
         Console.WriteLine("Succsess".Pastel(Color.LightGreen));
     }
     public static void showAllProducts()
     {
-        int len = Products.Count;
+        int len = products.Count;
         if (len == 0)
         {
             Console.WriteLine("You have 0 products in your Inventory");
@@ -84,13 +95,19 @@ class Inventory
             Console.WriteLine("Id. Name - Price - Quantity".Pastel(Color.LightBlue));
             for (int i = 0; i < len; i++)
             {
-                Console.WriteLine($"{i + 1}. {Products[i]} - {Price[i]} - {Quantity[i]}");
+                Product p = products[i]; //tworzymy zmienną typu product o nazwie "p" i przypisujemy jej i-ty obiekt (produkt)
+                Console.WriteLine($"{i+1}. {p.Name} - {p.Price} - {p.Quantity}");
             }
         }
     }
     public static void updateProducts()
     {
-        int len = Products.Count;
+        int len = products.Count;
+        if (len == 0)
+        {
+            Console.WriteLine("You have 0 products in your Inventory");
+            return;
+        }
         Console.WriteLine("Enter an Id of product you want to update: ");
         int id;
         if (!int.TryParse(Console.ReadLine(), out id))
@@ -116,6 +133,7 @@ class Inventory
             Console.WriteLine("You need to enter an intiger".Pastel(Color.Red));
             return;
         }
+        Product updateProduct = products[id - 1];
         if (pick == 1)
         {
             Console.WriteLine("Please enter new name for this product");
@@ -127,7 +145,7 @@ class Inventory
             }
             else
             {
-                Products[id - 1] = newName;
+                updateProduct.Name = newName;
                 Console.WriteLine("Succsess".Pastel(Color.LightGreen));
             }
         }
@@ -142,7 +160,7 @@ class Inventory
             }
             else
             {
-                Price[id - 1] = newPrice;
+                updateProduct.Price = newPrice;
                 Console.WriteLine("Succsess".Pastel(Color.LightGreen));
             }
         }
@@ -157,7 +175,7 @@ class Inventory
             }
             else
             {
-                Quantity[id - 1] = newQuantity;
+                updateProduct.Quantity = newQuantity;
                 Console.WriteLine("Succsess".Pastel(Color.LightGreen));
             }
         }
@@ -169,7 +187,16 @@ class Inventory
     }
     public static void deleteProducts()
     {
-        int len = Products.Count;
+        int len = products.Count;
+        if (len == 0)
+        {
+            Console.WriteLine("You have 0 products in your Inventory");
+            return;
+        }
+        else
+        {
+            showAllProducts();
+        }
         Console.WriteLine("Enter an Id of product you wanna delete: ");
         int id;
         if (!int.TryParse(Console.ReadLine(), out id))
@@ -187,9 +214,7 @@ class Inventory
             Console.WriteLine("Id must be highier than 0".Pastel(Color.Red));
             return;
         }
-        Products.RemoveAt(id - 1);
-        Price.RemoveAt(id - 1);
-        Quantity.RemoveAt(id - 1);
+        products.RemoveAt(id - 1);
         Console.WriteLine("Succsess".Pastel(Color.LightGreen));
     }
 }
