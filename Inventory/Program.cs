@@ -161,7 +161,7 @@ class Inventory
             "Invalid quantity format. Please enter a whole number.".Pastel(Color.Red)
         );
         
-        Product newProduct = new Product(name, price, quantity); //tworzymy zmienną typu Product o nazwie "newProduct" i przypisujemy jej wpisane przez użytkownika dane
+        Product newProduct = new Product(name, price, quantity); 
         products.Add(newProduct);
         Console.WriteLine("Success".Pastel(Color.LightGreen));
     }
@@ -175,7 +175,7 @@ class Inventory
         Console.WriteLine("Id. Name - Price - Quantity".Pastel(Color.LightBlue));
         for (int i = 0; i < products.Count; i++)
         {
-            Product p = products[i]; //tworzymy zmienną typu product o nazwie "p" i przypisujemy jej i-ty obiekt (produkt)
+            Product p = products[i]; 
             Console.WriteLine($"{i + 1}. {p.Name} - {p.Price:F2} - {p.Quantity}");        
         }
         
